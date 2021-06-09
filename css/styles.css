@@ -48,6 +48,7 @@ font-family: 'Open Sans', sans-serif;*/
 }
 
 .menu {
+    display: flex;
     text-decoration: none;
     color:  var(--canela);
     font-weight: 600;
@@ -81,7 +82,8 @@ body { /*PARA QUE ENCAJE CON EL MENU FIXED*/
 }
 
 #packsgrid {
-    display: grid;
+    display: flex;
+    /* flex-wrap: wrap; */
 	grid-template-areas:
     "pack1 pack2 pack3"
     "det1 det2 det3"
@@ -168,6 +170,7 @@ section#insights {
 
 footer {
     grid-area: "footer";
+    display: flex;
 }
 
 .footer {
@@ -366,6 +369,8 @@ a:hover {
 .copyright {
     font-size: 14px;
     letter-spacing: 1px;
+    display: flex;
+    padding: 0px 30px 10px;
 }
 
 h4 {
@@ -437,4 +442,8 @@ td {
 .swal-button--cancel:not([disabled]):hover{
     background-color: var(--black);
     color: white;
+}
+
+.row{
+    margin: 0px !important;
 }
