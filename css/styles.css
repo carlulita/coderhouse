@@ -388,7 +388,7 @@ h4 {
 }
 
 tfoot { 
-    border: none;
+    border: none !important;
     font-weight: 700;
     color: var(--black);
 }
@@ -446,4 +446,8 @@ td {
 
 .row{
     margin: 0px !important;
+}
+
+.border-bottom-color2{
+    border-color: none !important;
 }
