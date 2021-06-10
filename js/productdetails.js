@@ -54,7 +54,7 @@ let maiaHTML = `
     Partículas corazones dinámicas
     Animación al lanzar besos
     Make-up`
-let maiaLink = "https://www.instagram.com/ar/461815995042159/"
+let maiaLink = "https://www.instagram.com/ar/1109585266135574/"
 
 let ain = `Ain`
 let ainHTML = `
@@ -62,12 +62,12 @@ let ainHTML = `
     Filtro de color
     Efecto prisma
     Pestañas 3D`
-let ainLink = "https://www.instagram.com/ar/461815995042159/"
+let ainLink = "https://www.instagram.com/ar/1139277143166177/"
 
 let lerna = `Lerna`
 let lernaHTML = `
     Lentes de contacto 3D
     6 colores de cabello
     Pestañas 3D`
-let lernaLink = "https://www.instagram.com/ar/461815995042159/"
+let lernaLink = "https://www.instagram.com/ar/694477341433875/"
 
