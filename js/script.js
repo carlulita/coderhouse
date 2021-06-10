@@ -12,45 +12,33 @@ const traerDatos = async ()=>{
 traerDatos()
 
 let on = 0
-let carrito = []
 
 function showFichaCompra(arrayProductos) {
 
     
-    // let carrito = []
+    let carrito = []
+    let contadorProductos = 1
     let subtotal = 0
 
     function lS(){
         let carritoLS = JSON.parse(localStorage.getItem('carrito'))
 
         if(carritoLS) {
-        swal({
-            title: "¿Querés continuar tu última compra?",
-            text: "Si cancelás, no podrás recuperar los productos del carrito.",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-        .then((willDelete) => {
-            if (willDelete) {
+        carrito = carritoLS
+        let continuar = confirm('Quiere continuar su última compra?')
+        if (continuar){
             carrito = carritoLS
             carrito.forEach((productoLS) =>{
             let nombreLS = productoLS.nombre
             operacionesCarrito(nombreLS, productoLS)
             })
             actualizarSubtotal()
-            swal("Carrito recuperado", {
-                icon: "success",
-                });
-            } else {
+        } else {
             localStorage.removeItem('carrito')
             carrito = []
-                swal("Carrito vaciado", {
-                icon: "success",
-                });
-            }
-            });
         }
+    }
+
     }
 
     function actualizarSubtotal(){
@@ -66,44 +54,25 @@ function showFichaCompra(arrayProductos) {
 
     function operacionesCarrito(nombre, producto){
 
+        console.log(`El nombre es ${nombre} y el producto es ${producto}`)
+
+        let index2 = carrito.findIndex(elemento => elemento.nombre === nombre)
+
         $("#carritovacio").remove()
         
         $("#tablaCompra").append(
             `
-            <tr id="producto-${nombre}">
+            <tr id="${contadorProductos}" >
             <th scope="row">${producto.id}</th>
-            <td>${nombre}</td>
+            <td id="${nombre}">${nombre}</td>
             <td>${producto.precio} ${producto.currency}</td>
-            <td><button id="${nombre}" class="trash"><img src="media/trash.png" height="18px" width="18px" alt="eliminar"></button></td>
+            <td><button class="trash"><img src="media/trash.png" height="18px" width="18px" alt="eliminar"></button></td>
             </tr>
             `
         )
-    
-        $(`#${nombre}`).on('click', function() { 
-            $(`#producto-${nombre}`).remove()
+    }
 
-            let index = carrito.findIndex(elemento => elemento.nombre === nombre)
-
-            subtotal = subtotal - producto.precio
-
-            carrito.splice(index, 1)
-            localStorage.setItem('carrito', JSON.stringify(carrito))
-            actualizarSubtotal(subtotal)
-            console.log(carrito)
-
-            if(carrito.length === 0) {
-                localStorage.removeItem('carrito')
-                $("#tablaCompra").prepend(
-                    `                    
-                    <tr>
-                    <td id="carritovacio" colspan="4">Carrito vacío</td>
-                    </tr>`
-                )
-                }
-            })
-        }
-
-    function comprar(){  
+    function comprar(){            
 
         const inputProducto = document.getElementById('input-producto')
 
@@ -111,9 +80,11 @@ function showFichaCompra(arrayProductos) {
         console.log(inputProducto.value)
 
         let producto = arrayProductos.find( element => element.nombre == nombre)
+        console.log(producto)
 
         if(producto && carrito.length >=1) {
             let productosCarrito = carrito.find(element => element.nombre == nombre)
+            // console.log(`Estoy encontrando ${productosCarrito}`)
                 if (productosCarrito === producto) 
                 console.log("El producto ya está en el carrito")
                 if (productosCarrito !== producto)
@@ -129,11 +100,35 @@ function showFichaCompra(arrayProductos) {
             operacionesCarrito(nombre, producto)
         }
 
-        console.log(carrito)
-        $('#finalizarcompra').on('click', function() { 
-            console.log("Mercado libre")
-            finalizarCompra()
+        $(`#${contadorProductos}`).on('click', function() { 
+            console.log(this)
+            $(this).remove()
+
+            contadorProductos = contadorProductos - 1
+
+            console.log(nombre)
+
+            let index = carrito.findIndex(elemento => elemento.nombre === nombre)
+
+            subtotal = subtotal - producto.precio
+            console.log(subtotal)
+
+            carrito.splice(index, 1)
+            localStorage.setItem('carrito', JSON.stringify(carrito))
+            actualizarSubtotal(subtotal)
+            console.log(carrito)
+
+            if(carrito.length === 0) {
+            $("#tablaCompra").prepend(
+                `                    
+                <tr>
+                <td id="carritovacio" colspan="4">Carrito vacío</td>
+                </tr>`
+            )
+            }
         })
+        contadorProductos++
+        console.log(carrito)
     }
 
     fichacompra.innerHTML = ''
@@ -196,7 +191,11 @@ function showFichaCompra(arrayProductos) {
 
     btnAgregar.addEventListener('click', (event) => {
         event.preventDefault()
-        comprar()
+        comprar(contadorProductos)
+    })
+
+    $('#finalizarcompra').on('click', function() { 
+        finalizarCompra()
     })
     
 
@@ -227,8 +226,7 @@ function showFichaCompra(arrayProductos) {
         const {init_point} = await resp.json()
     
         window.open(init_point, '_blank')
+    
     }
 
 }
-
-
