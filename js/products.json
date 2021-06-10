@@ -1,8 +1,8 @@
 [
-    {"id": 0, "nombre": "Alsephina", "precio": 150, "currency": "USD"},
-    {"id": 1, "nombre": "Irena", "precio": 200, "currency": "USD"},
-    {"id": 2, "nombre": "Ara", "precio": 100, "currency": "USD"},
-    {"id": 3, "nombre": "Maia", "precio": 300, "currency": "USD"},
-    {"id": 4, "nombre": "Ain", "precio": 250, "currency": "USD"},
-    {"id": 5, "nombre": "Lerna", "precio": 150, "currency": "USD"}
+    {"id": "0AL00", "nombre": "Alsephina", "precio": 150, "currency": "USD"},
+    {"id": "0IR01", "nombre": "Irena", "precio": 200, "currency": "USD"},
+    {"id": "0AR02", "nombre": "Ara", "precio": 100, "currency": "USD"},
+    {"id": "0MA03", "nombre": "Maia", "precio": 300, "currency": "USD"},
+    {"id": "0AI04", "nombre": "Ain", "precio": 250, "currency": "USD"},
+    {"id": "0LE05", "nombre": "Lerna", "precio": 150, "currency": "USD"}
 ]
